@@ -1,8 +1,28 @@
-![Auto Assign](https://github.com/CLS-1000/demo-repository/actions/workflows/auto-assign.yml/badge.svg)
-
 ![Proof HTML](https://github.com/CLS-1000/demo-repository/actions/workflows/proof-html.yml/badge.svg)
 
-# Welcome to your organization's demo respository
-This code repository (or "repo") is designed to demonstrate the best GitHub has to offer with the least amount of noise.
+# SWITCHBOARD demo
 
-The repo includes an `index.html` file (so it can render a web page), two GitHub Actions workflows, and a CSS stylesheet dependency.
+An interactive demo of SWITCHBOARD, the operator's board over the CLS-1000 systems, and the SPEC-1 desks behind it.
+
+**Everything here runs on sample data.** The runs, records, briefs and signals are illustrative. Nothing in this demo is live, and nothing is published from it.
+
+## Pages
+
+| Page | What it shows |
+| --- | --- |
+| [`index.html`](index.html) | SWITCHBOARD: one panel per system, with a lamp for each line's state |
+| [`triage.html`](triage.html) | Triage Desk: cycle runs, the gate funnel, and each record's provenance |
+| [`legislative.html`](legislative.html) | Legislative Desk: Oregon measures, interim hearings and the desk brief |
+| [`narrative.html`](narrative.html) | Narrative Desk: drafts in the editorial-proof layout, and release behind the publish guard |
+| [`mcp.html`](mcp.html) | MCP Console: the tools SPEC-1 exposes to Claude |
+| [`citizen.html`](citizen.html) | Citizen Cognisance: a map of documented ties in Portland's political ecosystem |
+
+## Viewing it
+
+Open `index.html` in a browser, or use the GitHub Pages site for this repository.
+
+## Rights
+
+© EVASTARARCANA LLC. All rights reserved. This demo is shared for viewing only. It is not open source, and no license to copy, modify or redistribute it is granted.
+
+Corrections and questions are welcome as issues. Pull requests are not accepted.
