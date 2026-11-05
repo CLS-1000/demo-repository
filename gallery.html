@@ -17,6 +17,10 @@ h1 { margin: 0; font-family: 'Oxanium', sans-serif; font-weight: 700; font-size:
 .swatch { width: 44px; height: 44px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; background-clip: padding-box; box-shadow: inset 0 0 0 3px var(--navy); }
 .swatch[aria-pressed="true"] { border-color: var(--paper); }
 .swatch:focus-visible { outline: 2px solid var(--paper); outline-offset: 3px; }
+.controls { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; }
+.motion { min-height: 44px; padding: 0 18px; border-radius: 22px; border: 1px solid var(--steel); background: transparent; color: var(--paper); font: 500 13px 'IBM Plex Mono', monospace; letter-spacing: 0.06em; cursor: pointer; }
+.motion:hover { border-color: var(--paper); }
+.motion:focus-visible { outline: 2px solid var(--paper); outline-offset: 3px; }
 section { margin-top: 56px; }
 h2 { margin: 0 0 20px; font-family: 'Oxanium', sans-serif; font-weight: 600; font-size: 24px; letter-spacing: 0.03em; }
 .boards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 520px), 1fr)); gap: 32px 24px; }
@@ -33,12 +37,15 @@ h2 { margin: 0 0 20px; font-family: 'Oxanium', sans-serif; font-weight: 600; fon
       <p class="eyebrow">SWITCHBOARD SYSTEM · BRAND</p>
       <h1>SWITCHBOARD Logo Family</h1>
     </div>
+    <div class="controls">
+    <button type="button" class="motion" id="motion" aria-pressed="false">Pause animations</button>
     <div class="accent" role="group" aria-label="Accent color">
       <span>Accent</span>
       <button type="button" class="swatch" data-accent="#F26A1B" aria-label="Signal orange" aria-pressed="true" style="background: #F26A1B"></button>
       <button type="button" class="swatch" data-accent="#E8B23A" aria-label="Brass" aria-pressed="false" style="background: #E8B23A"></button>
       <button type="button" class="swatch" data-accent="#3FB6A8" aria-label="Teal" aria-pressed="false" style="background: #3FB6A8"></button>
       <button type="button" class="swatch" data-accent="#D94B5C" aria-label="Alarm red" aria-pressed="false" style="background: #D94B5C"></button>
+    </div>
     </div>
   </header>
   <section aria-labelledby="s1">
@@ -176,23 +183,36 @@ var ro = new ResizeObserver(function (entries) {
 });
 document.querySelectorAll(".frame").forEach(function (f) { ro.observe(f); });
 
-// Accent picker: re-render every board (and the board links) with the chosen accent.
+// Accent picker and Pause control: re-render every board with the chosen accent and motion setting.
+// Board links carry the accent only; the frames also carry ?paused=1 while paused.
 var swatches = document.querySelectorAll(".swatch");
-function setAccent(hex) {
-  var q = hex === "#F26A1B" ? "" : "?accent=" + hex.slice(1);
-  swatches.forEach(function (s) { s.setAttribute("aria-pressed", String(s.dataset.accent === hex)); });
+var motion = document.getElementById("motion");
+var accent = "#F26A1B";
+var paused = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function render() {
+  var params = new URLSearchParams();
+  if (accent !== "#F26A1B") params.set("accent", accent.slice(1));
+  var linkQ = params.toString() ? "?" + params : "";
+  if (paused) params.set("paused", "1");
+  var frameQ = params.toString() ? "?" + params : "";
+  swatches.forEach(function (s) { s.setAttribute("aria-pressed", String(s.dataset.accent === accent)); });
+  motion.setAttribute("aria-pressed", String(paused));
+  motion.textContent = paused ? "Play animations" : "Pause animations";
   document.querySelectorAll(".board").forEach(function (b) {
     var link = b.querySelector("a"), frame = b.querySelector("iframe");
-    var src = link.getAttribute("href").split("?")[0] + q;
-    link.setAttribute("href", src);
-    frame.setAttribute("src", src);
+    var base = link.getAttribute("href").split("?")[0];
+    link.setAttribute("href", base + linkQ);
+    if (frame.getAttribute("src") !== base + frameQ) frame.setAttribute("src", base + frameQ);
   });
-  document.documentElement.style.setProperty("--accent", hex);
-  history.replaceState(null, "", location.pathname + q);
+  document.documentElement.style.setProperty("--accent", accent);
+  history.replaceState(null, "", location.pathname + linkQ);
 }
+function setAccent(hex) { accent = hex; render(); }
 swatches.forEach(function (s) { s.addEventListener("click", function () { setAccent(s.dataset.accent); }); });
+motion.addEventListener("click", function () { paused = !paused; render(); });
 var start = new URLSearchParams(location.search).get("accent");
-if (start && /^[0-9a-f]{6}$/i.test(start)) setAccent("#" + start.toUpperCase());
+if (start && /^[0-9a-f]{6}$/i.test(start)) accent = "#" + start.toUpperCase();
+render();
 </script>
 </body>
 </html>
