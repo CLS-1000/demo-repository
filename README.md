@@ -11,11 +11,14 @@ An interactive demo of SWITCHBOARD, the operator's board over the CLS-1000 syste
 | Page | What it shows |
 | --- | --- |
 | [`index.html`](index.html) | SWITCHBOARD: one panel per system, with a lamp for each line's state |
+| [`gallery.html`](gallery.html) | SWITCHBOARD logo family gallery, including the CLS foundation mark, project logos, sacred-geometry variations, animated intros, The Sentinel finale and a repo-data card |
 | [`triage.html`](triage.html) | Triage Desk: cycle runs, the gate funnel, and each record's provenance |
 | [`legislative.html`](legislative.html) | Legislative Desk: Oregon measures, interim hearings and the desk brief |
 | [`narrative.html`](narrative.html) | Narrative Desk: drafts in the editorial-proof layout, and release behind the publish guard |
 | [`mcp.html`](mcp.html) | MCP Console: the tools SPEC-1 exposes to Claude |
 | [`citizen.html`](citizen.html) | Citizen Cognisance: a map of documented ties in Portland's political ecosystem |
+
+The logo gallery's accent color defaults to signal orange (`#F26A1B`). Use its swatches to switch colors, or add `?accent=<hex>` to any board page, e.g. `brand/switchboard.html?accent=3FB6A8`.
 
 ## Viewing it
 
