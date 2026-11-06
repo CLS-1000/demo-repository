@@ -18,11 +18,11 @@ An interactive demo of SWITCHBOARD, the operator's board over the CLS-1000 syste
 | [`mcp.html`](mcp.html) | MCP Console: the tools SPEC-1 exposes to Claude |
 | [`citizen.html`](citizen.html) | Citizen Cognisance: a map of documented ties in Portland's political ecosystem |
 
-The logo gallery's accent color defaults to signal orange (`#F26A1B`). Use its swatches to switch colors, or add `?accent=<hex>` to any board page, e.g. `brand/switchboard.html?accent=3FB6A8`.
+The logo gallery's accent color defaults to signal orange (`#F26A1B`). Use its swatches to switch colors, or add `?accent=<hex>` to the gallery or any page under `brand/`, e.g. `brand/switchboard.html?accent=3FB6A8`.
 
 ## Viewing it
 
-Open `index.html` in a browser, or use the GitHub Pages site for this repository.
+Open `index.html` in a browser, or use the GitHub Pages site: https://cls-1000.github.io/demo-repository/
 
 ## Rights
 
