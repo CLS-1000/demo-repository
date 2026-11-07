@@ -1,6 +1,6 @@
 ![Proof HTML](https://github.com/CLS-1000/demo-repository/actions/workflows/proof-html.yml/badge.svg)
 
-# SWITCHBOARD demo
+# [switchboard]
 
 An interactive demo of SWITCHBOARD, the operator's board over the CLS-1000 systems, and the SPEC-1 desks behind it.
 
